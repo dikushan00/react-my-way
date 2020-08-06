@@ -1,0 +1,17 @@
+
+.currentPage{
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.pagination{
+    padding: 20px;
+    background-color: white;
+    width: 96%;
+    border-radius: 5px;
+}
+
+.pag_item{
+    margin-left: 10px;
+    cursor: pointer;
+}

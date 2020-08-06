@@ -1,9 +1,42 @@
 .header {
     grid-area: h;
-    background-color: green;
+    background-color: #fff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
 }
 
 .header img {
-    width: 50px;
+    width: 60px;
+    margin-left: 25px;
 }
+
+.accountInfo{
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.accountInfo img{
+    height: 35px;
+}
+
+.accountDrop{
+    position: absolute;
+    padding: 10px 22px;
+    background-color: #fff;
+    border: 1px solid #4a76a8;
+    border-radius: 4px;
+    display: none;
+    top: 30px;
+    left: 40px;
+}
+
+.accountInfo:hover .accountDrop{
+    display: block;
+}
+
 

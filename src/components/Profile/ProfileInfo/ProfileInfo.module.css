@@ -1,0 +1,11 @@
+.descriptionBlock{
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.avaImg{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}

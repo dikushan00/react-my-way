@@ -1,14 +1,80 @@
 .nav {
     grid-area: n;
-    background-color: burlywood;
-    padding: 15px;
+    background-color: #fff;
+    padding: 10px 0 100px;
+    margin-top: 5px;
+    border-radius: 5px;
 }
 
 .item {
     color: white;
     margin-top: 15px;
+    display: flex;
+    transition: .09s all;
+}
+
+.item:hover{
+    background-color: #ccc;
+}
+
+.item a{
+    text-decoration: none;
+    color: #4a76a8;
 }
 
 .item.active {
-    color: gold;
+    color: gold !important;
+}
+
+.itemLink{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.linkWrap{
+    padding: 7px 15px;
+    display: flex;
+    align-items: center;
+}
+
+.linkName{
+    margin-left: 9px;
+}
+
+.item.itemSettings{
+    margin-top: 30px;
+}
+
+.navbarItemImg{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+
+.navbarItemImg.music{
+    background: url("https://image.flaticon.com/icons/svg/876/876817.svg") no-repeat;
+}
+
+.navbarItemImg.settings{
+    background: url("https://image.flaticon.com/icons/svg/889/889744.svg") no-repeat;
+}
+
+.navbarItemImg.profile{
+    background: url("https://image.flaticon.com/icons/svg/1077/1077114.svg") no-repeat;
+}
+
+.navbarItemImg.message{
+    background: url("https://image.flaticon.com/icons/svg/2462/2462719.svg") no-repeat;
+    background-size: contain;
+}
+
+.navbarItemImg.news{
+    background: url("https://image.flaticon.com/icons/svg/3158/3158703.svg") no-repeat;
+    background-size: contain;
+}
+
+.navbarItemImg.users{
+    background: url("https://image.flaticon.com/icons/svg/681/681494.svg") no-repeat;
+    background-size: contain;
 }

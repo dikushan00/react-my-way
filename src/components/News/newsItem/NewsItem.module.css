@@ -1,0 +1,70 @@
+.newsItem{
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.newsItem img{
+    width: 600px;
+}
+
+.user{
+    font-size: 17px;
+    display: block;
+}
+
+.newsTitle{
+    display: block;
+    margin-top: 15px;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.reviewCount{
+    display: flex;
+    align-items: center;
+    height: 80px;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    padding: 0 25px;
+}
+.reviewCount span{
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.commentsArea{
+    padding: 10px 20px;
+}
+
+.commentsItem{
+    padding: 0 10px;
+    margin-top: 15px;
+}
+
+.inputComment{
+    display: flex;
+    width: 100%;
+}
+
+.inputComment button{
+    padding: 7px 22px;
+    margin-left: 7px;
+    cursor: pointer;
+}
+
+.inputComment input{
+    padding: 7px 10px;
+}
+
+.reviewIcon{
+    cursor: pointer;
+    margin-right: 5px;
+    width: 25px !important;
+}
+
+.userImg{
+    width: 35px !important;
+}
