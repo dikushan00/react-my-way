@@ -1,6 +1,6 @@
 .header {
     grid-area: h;
-    background-color: #fff;
+    background-color: #4a76a8;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -9,7 +9,7 @@
 }
 
 .header img {
-    width: 60px;
+    height: 80px;
     margin-left: 25px;
 }
 
@@ -18,6 +18,17 @@
     align-items: center;
     position: relative;
     cursor: pointer;
+    margin-right: 40px;
+    padding-right: 30px;
+    height: 100%;
+    background: url(https://image.flaticon.com/icons/svg/625/625946.svg) no-repeat;
+    background-size: 8px;
+    background-position-x: 155px;
+    background-position-y: 27px;
+}
+
+.accountInfo:hover {
+    background-color: #4a76a1;
 }
 
 .accountInfo img{
@@ -30,13 +41,17 @@
     background-color: #fff;
     border: 1px solid #4a76a8;
     border-radius: 4px;
-    display: none;
-    top: 30px;
+    display: block;
+    top: 55px;
     left: 40px;
 }
 
-.accountInfo:hover .accountDrop{
-    display: block;
+.userImg{
+    border-radius: 50%;
+    margin-right: 8px;
 }
 
+.login:hover {
+    text-decoration: underline;
+}
 

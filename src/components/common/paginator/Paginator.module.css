@@ -1,7 +1,11 @@
 
 .currentPage{
     font-weight: bold;
-    margin-left: 10px;
+    background-color: #4a76a8;
+    border: 1px solid #4a76a8;
+    border-radius: 3px;
+    padding: 2px 8px;
+    color: #fff !important;
 }
 
 .pagination{
@@ -11,7 +15,31 @@
     border-radius: 5px;
 }
 
-.pag_item{
+.paginationCon{
+    display: flex;
+    align-items: center;
+    width: 600px;
+}
+
+.pagItem {
     margin-left: 10px;
     cursor: pointer;
+    border: 1px solid #4a76a8;
+    border-radius: 3px;
+    padding: 2px 8px;
+    color: #4a76a8;
+}
+
+.pagItem:hover {
+    background-color: #4a76a8;
+    color: #fff;
+}
+
+.btn{
+    background-color: #4a76a8;
+    border-radius: 3px;
+    border: 0;
+    margin: 0 10px;
+    color: #fff;
+    padding: 4px 8px;
 }

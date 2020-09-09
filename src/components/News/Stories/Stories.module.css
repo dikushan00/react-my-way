@@ -1,0 +1,12 @@
+.storiesArea {
+    display: flex;
+    padding: 10px 15px;
+}
+
+.storiesItem {
+    margin-left: 15px;
+}
+
+.storiesImg {
+    width: 85px;
+}

@@ -9,3 +9,35 @@
     height: 100px;
     border-radius: 50%;
 }
+
+.contact{
+    padding-left: 10px;
+}
+
+.btn{
+    position: absolute;
+    left: 374px;
+    top: 2px;
+}
+
+.editBtn{
+    background: url('../../../img/edit.svg') no-repeat;
+    background-size: 13px;
+    height: 13px;
+    width: 13px;
+    border: none;
+    outline: none;
+}
+
+.inputPhoto{
+    margin: 42px 30px;
+}
+
+.profileData>div{
+    margin-top: 10px;
+}
+
+.infoKey{
+    width: 220px;
+    font-weight: bold;
+}

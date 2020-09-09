@@ -24,10 +24,10 @@
 .reviewCount{
     display: flex;
     align-items: center;
-    height: 80px;
+    height: 50px;
+    margin-bottom: 10px;
     border-bottom: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    padding: 0 25px;
+    padding: 0 3px;
 }
 .reviewCount span{
     display: flex;
@@ -36,12 +36,14 @@
 }
 
 .commentsArea{
-    padding: 10px 20px;
+    padding: 10px 0;
 }
 
 .commentsItem{
-    padding: 0 10px;
+    padding: 0 5px;
     margin-top: 15px;
+    display: flex;
+    align-items: center;
 }
 
 .inputComment{
@@ -56,15 +58,79 @@
 }
 
 .inputComment input{
-    padding: 7px 10px;
+    padding: 6px 10px;
+    margin-left: 5px;
 }
 
 .reviewIcon{
     cursor: pointer;
     margin-right: 5px;
-    width: 25px !important;
+    width: 20px !important;
 }
 
 .userImg{
-    width: 35px !important;
+    width: 45px !important;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.commentPhoto{
+    width: 40px !important;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.newsItemContent {
+    cursor: pointer;
+}
+
+.postImg {
+    width: 550px;
+    height: auto;
+}
+
+/* Modal window */
+
+#BigModeArea {
+    display: none;
+    position: fixed;
+    max-width: 1000px;
+    height: auto;
+    z-index: 9999;
+    width: 100%;
+    height: 650px;
+}
+
+.BigModeArea {
+    display: flex !important;
+    left: 20%;
+    top: 45px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.rightContent {
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    width: 100%;
+    padding-left: 15px;
+}
+
+.rightContent:hover {
+    overflow-y: scroll;
+}
+
+.closeBig {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    z-index: 10001;
+    background: url(https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png);
+    background-size: contain;
+    cursor: pointer;
 }
