@@ -1,7 +1,8 @@
 import React from 'react';
 import s from './Header.module.css';
 import {NavLink, Redirect} from "react-router-dom";
-import userPhoto from '../../img/user (1).svg'
+import userPhoto from '../../img/user(1).svg'
+import logoImg from '../../img/logo.png'
 
 const Header = (props) => {
 
@@ -10,11 +11,11 @@ const Header = (props) => {
     }
 
     return <header className={s.header}>
-        <a className="logo"><img src='https://www.freelogodesign.org/Content/img/logo-ex-7.png' /></a>
+        <NavLink className="logo" to='/'><img src={logoImg} /></NavLink>
         <div className={s.authArea}>
             { props.isAuth
                 ? <div className={s.accountInfo}>
-                    {props.photo ? <img src={props.photo} /> : <img src={userPhoto}/>}
+                    {props.photo ? <img src={props.photo} className={s.userImg}/> : <img src={userPhoto} className={s.userImg}/>}
                     {props.login}
                     <div className={s.accountDrop}>
                         <p>{props.login}</p>

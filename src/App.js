@@ -13,14 +13,20 @@ import {compose} from "redux";
 import {Provider, connect} from "react-redux";
 import Preloader from "./components/common/Preloader/Preloader";
 import {init} from "./redux/app_reducer";
-import store from "./redux/store-redux";
+import {check_auth} from "./redux/profile_reducer";
+import store, {AppStateType} from "./redux/store-redux";
 import { withSuspens } from './components/HOC/withSuspens';
 
 
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
-class App extends PureComponent {
+type PropsType = {
+    init: () => void
+    initialized: boolean
+    myId: number
+}
+class App extends PureComponent<PropsType> {
 
     componentDidMount() {
         this.props.init()
@@ -31,11 +37,12 @@ class App extends PureComponent {
         if (!this.props.initialized){
             return <Preloader />
         }
+        
         return (
             <div className="wrapper">
                 <div className='app-wrapper'>
-                    <HeaderContainer/>
-                    <NavbarContainer/>
+                    <HeaderContainer />
+                    <NavbarContainer />
                     <div className="app-wrapper-content">
                         <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                         <Route path='/dialogs/:userId?' render={withSuspens(DialogsContainer)}/>
@@ -43,7 +50,7 @@ class App extends PureComponent {
                         <Route path='/settings' render={() => <Settings/>}/>
                         <Route path='/news' render={() => <NewsContainer/>}/>
                         <Route exact path='/' render={() => <NewsContainer/>}/>
-                        <Route path='/users' render={withSuspens(UsersContainer)}/>
+                        <Route path='/users' render={ <UsersContainer pageTitle = {"Dikushan"}/>}/>
                         <Route path='/login' render={() => <Login/>}/>
                     </div>
                 </div>
@@ -53,16 +60,17 @@ class App extends PureComponent {
     }
 }
 
-let mapStateToProps = (state) => ({
-    initialized: state.app.initialized
+let mapStateToProps = (state: AppStateType) => ({
+    initialized: state.app.initialized,
+    myId: state.auth.id
 })
 
 let AppContainer =  compose(
     withRouter,
-    connect(mapStateToProps, {init})
+    connect(mapStateToProps, {init, check_auth})
 )(App);
 
-const MyWayApp = (props) => {
+const MyWayApp: React.ComponentType = (props: any) => {
     return <BrowserRouter>
                 <Provider store={store}>
                     <AppContainer />
