@@ -16,7 +16,7 @@ const FriendsBar: React.FC<PropsType> = ({friends}) => {
         {
             friends.map((item, i) => {
                 if(i<5){
-                    return <div key={item.id}><NavLink to={`profile/${item.id}`} className={style.item}>
+                    return <div key={item.id}><NavLink to={`/profile/${item.id}`} className={style.item}>
                         {
                         item.photos.large 
                             ? <img src={item.photos.large as string | undefined} style={{width: '40px'}} alt="User"/>

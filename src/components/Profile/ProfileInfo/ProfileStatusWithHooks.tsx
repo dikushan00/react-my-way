@@ -1,10 +1,5 @@
 import React, {useEffect, useState, ChangeEvent} from 'react';
 
-type PropsType = {
-    status: string
-    updateStatus: (text: string) => void
-}
-
 const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
 
     const [editMode, setEditMode] = useState(false)
@@ -26,8 +21,14 @@ const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
     return <div>
         { editMode
             ? <input onChange={onStatusChange} autoFocus={true} onBlur={toggleEditMode} type="text" value={status}/>
-            : <span onDoubleClick={toggleEditMode}>{status || 'Напишите немного о себе'}</span>}
+            : <span onDoubleClick={toggleEditMode} style = {{cursor: "pointer"}}>{status || 'Напишите немного о себе'}</span>}
     </div>
 }
 
 export default ProfileStatusWithHooks;
+
+
+type PropsType = {
+    status: string
+    updateStatus: (text: string) => void
+}

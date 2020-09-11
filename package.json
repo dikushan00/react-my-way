@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-brands-svg-icons": "^5.14.0",
+    "@fortawesome/free-regular-svg-icons": "^5.14.0",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/react-fontawesome": "^0.1.11",
     "@types/classnames": "^2.2.10",
@@ -21,6 +23,7 @@
     "formik": "^2.1.5",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-dropzone": "^11.1.0",
     "react-image-crop": "^8.6.5",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",

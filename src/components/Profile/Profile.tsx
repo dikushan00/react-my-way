@@ -15,7 +15,9 @@ const Profile: React.FC<PropsType> = (props) => {
           status = {props.status}
           updateStatus = {props.updateStatus} 
           updatePhoto={props.updatePhoto}
-          saveProfile={props.saveProfile}/>
+          saveProfile={props.saveProfile}
+          follow = {props.follow}
+          unfollow = {props.unfollow}/>
       <MyPostsContainer />
     </div>
   )
@@ -28,7 +30,10 @@ type PropsType = {
   state: ProfileInitialStateType
   isOwner: boolean
   status: string
+
   updateStatus: (data: string) => void
   updatePhoto: (file: File) => void
   saveProfile: (data: SaveProfileType) => Promise<SaveProfileType>
+  unfollow: (userId: number) => void
+  follow: (userId: number) => void
 }

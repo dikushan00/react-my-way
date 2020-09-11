@@ -89,7 +89,7 @@ let profile_reducer = (state = initialState, action: ActionsType): ProfileInitia
                         id: 5,
                         fullName: '',
                         title: action.newPostText,
-                        photo: state.photos && state.photos.large,
+                        photo: '',
                         avatar: '',
                         comments: [],
                         likesCount: 0,

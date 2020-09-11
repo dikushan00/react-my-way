@@ -7,6 +7,7 @@ import {compose} from "redux";
 import {withAuthRedirect} from "../HOC/withAuthRedirect"
 import { AppStateType } from '../../redux/store-redux';
 import { ProfileType, SaveProfileType } from '../../Types/Types';
+import { follow, unfollow } from './../../redux/users_reducer';
 
 class ProfileContainer extends PureComponent<PropsType & RouteComponentProps<RouteParamsProps>> {
 
@@ -36,7 +37,9 @@ class ProfileContainer extends PureComponent<PropsType & RouteComponentProps<Rou
                 status = {this.props.status}
                 updateStatus={this.props.updateStatus} 
                 updatePhoto={this.props.updatePhoto}
-                saveProfile={this.props.saveProfile}/>
+                saveProfile={this.props.saveProfile}
+                follow = {this.props.follow}
+                unfollow = {this.props.unfollow}/>
         )
     }
 }
@@ -54,7 +57,9 @@ export default compose<React.ComponentType>(
         getStatus, 
         updateStatus, 
         updatePhoto, 
-        saveProfile}),
+        saveProfile,
+        follow,
+        unfollow}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)
@@ -72,6 +77,8 @@ type PropsType = {
     saveProfile: (data: SaveProfileType) => Promise<SaveProfileType>
     check_auth: (userId: number) => void
     getStatus: (userId: number) => void
+    unfollow: (userId: number) => void
+    follow: (userId: number) => void
 }
 
 type RouteParamsProps = {

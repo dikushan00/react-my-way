@@ -21,27 +21,6 @@ import {
 import { AppStateType } from '../../redux/store-redux';
 import { UserType } from '../../Types/Types';
 
-type mapStateType = {
-    state: Array<UserType>
-    currentPage: number
-    pageCount: number
-    pageSize: number
-    isFetching: boolean
-    toggleProgressArr: Array<number>
-    filter: FilterType
-}
-
-type mapDispatchType = {
-    toggleProgress: (isFetching: boolean, id: number) => void
-    switch_follow: (userId: number) => void
-    pageEvent: (n: number) => void
-    getUsers: (page: number, pageSize: number, filter: FilterType) => void
-    unfollow: (userId: number) => void
-    follow: (userId: number) => void
-}
-
-type PropsType = mapStateType & mapDispatchType
-
 
 class UsersContainer extends PureComponent<PropsType> {
 
@@ -101,26 +80,23 @@ export default compose<React.ComponentType>(
 )(UsersContainer)
 
 
+type mapStateType = {
+    state: Array<UserType>
+    currentPage: number
+    pageCount: number
+    pageSize: number
+    isFetching: boolean
+    toggleProgressArr: Array<number>
+    filter: FilterType
+}
 
+type mapDispatchType = {
+    toggleProgress: (isFetching: boolean, id: number) => void
+    switch_follow: (userId: number) => void
+    pageEvent: (n: number) => void
+    getUsers: (page: number, pageSize: number, filter: FilterType) => void
+    unfollow: (userId: number) => void
+    follow: (userId: number) => void
+}
 
-//
-// const mapDispatchToProps = (dispatch) => {
-//
-//     return {
-//         switch_follow: (usersId) => {
-//             dispatch(switch_followAC(usersId))
-//         },
-//         setUsers: (users) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         setCurrentPage: (currentPage) => {
-//             dispatch(setCurrentPageAC(currentPage))
-//         },
-//         setCountPage: (pageCount) => {
-//             dispatch(setPageCountAC(pageCount))
-//         },
-//         toggleIsFetching: (isFetching) => {
-//             dispatch(toggleIsFetchingAC(isFetching))
-//         }
-//     }
-// }
+type PropsType = mapStateType & mapDispatchType
