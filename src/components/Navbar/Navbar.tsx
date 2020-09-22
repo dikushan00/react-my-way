@@ -1,20 +1,16 @@
 import React, { Props } from 'react';
 import s from './Navbar.module.css';
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
-import {NavDataItemType} from "../../redux/navbar_reducer";
 import { AppStateType } from '../../redux/store-redux';
 import FriendsBar from './FriendsBar/FreindsBar';
-import { UserType } from '../../Types/Types';
 
-type PropsType = {
-    state: Array<NavDataItemType>
-    friends: Array<UserType>
-}
+const Navbar: React.FC = () => {
 
-const Navbar: React.FC<PropsType> = ({state, friends}) => {
+    const navState = useSelector((state: AppStateType) => state.navbar.navData)
+
     return <nav className={s.nav}>
-        {state.map((data) => (
+        {navState.map((data) => (
             <div className={s.item} key={data.id}>
                 <NavLink to={'/' + data.href} className={s.itemLink}>
                     <span className={s.linkWrap}>
@@ -24,15 +20,8 @@ const Navbar: React.FC<PropsType> = ({state, friends}) => {
                 </NavLink>
             </div>
         ))}
-        <FriendsBar friends = {friends}/>
+        <FriendsBar />
     </nav>
 }
-
-let mapStateToProps = (state: AppStateType) => ({
-    state: state.navbar.navData,
-    friends: state.usersPage.friends
-})
-
-export const NavbarContainer = connect(mapStateToProps)(Navbar)
 
 export default Navbar;

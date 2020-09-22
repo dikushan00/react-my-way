@@ -9,6 +9,7 @@ import { reducer as formReducer } from 'redux-form'
 import thunkMiddleWare from 'redux-thunk'
 import app_reducer from "./app_reducer";
 import { ThunkAction } from 'redux-thunk';
+import music_reducer from "./music_reducer";
 
 let reducers = combineReducers({
     dialogPage: dialogs_reducer,
@@ -18,6 +19,7 @@ let reducers = combineReducers({
     usersPage: users_reducer,
     auth: header_reducer,
     app: app_reducer,
+    music: music_reducer,
     form: formReducer
 })
 

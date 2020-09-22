@@ -1,0 +1,314 @@
+
+.hide {
+    display: none;
+  }
+  
+  .main {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .top {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  header h3 {
+    font-weight: normal;
+    margin: 0;
+    padding: 10px;
+  }
+  
+  .playlist {
+    margin-top: 15px;
+    border-radius: 5px;
+    width: 100%;
+    min-height: 580px;
+  }
+  
+  .selected {
+    background: #e5ebf1;
+  }
+  
+  .playlist .header {
+    padding: 5px;
+  }
+  
+  .songContainer {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .songContainer:hover {
+    background: #f0f2f5;
+  }
+  
+  .pltext {
+    padding: 5px;
+  }
+  
+  .loi {
+    margin: 0;
+    list-style: none;
+    padding: 10px;
+  }
+  
+  .loi li {
+    font-weight: 450;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+  }
+  
+  .songlist {
+    overflow-y: hidden;
+  }
+
+  .songlist:hover {
+    overflow-y: scroll;
+  }
+  
+  .song {
+    margin-left: 10px;
+  }
+
+  .musicIcon {
+    height: 85%;
+    width: 36px;
+    text-align: center;
+    line-height: 2;
+    border-radius: 5px;
+    background: #e5ebf1;
+  }
+  
+  .controls {
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    background: #fff;
+    color: #000;
+    align-items: center;
+    position: relative;
+    border-radius: 5px;
+  }
+  
+  .vlme {
+    display: flex;
+    align-content: center;
+    overflow: hidden;
+    width: 25px;
+    transition: all 500ms;
+    position: absolute;
+    left: 0;
+  }
+  
+  .vlme:hover {
+    width: 90px;
+  }
+  
+  .volum {
+    padding: 10px;
+  }
+  
+  #volBar {
+    padding: 0;
+    margin: 0;
+    width: 50px;
+    background: transparent;
+  }
+  
+  #volBar::-moz-range-thumb {
+    height: 10px;
+    width: 3px;
+    background: #2A6586;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .musicControls {
+    margin-left: 90px;
+  }
+  
+  .musicControls span {
+    cursor: pointer;
+  }
+  
+  .musicControls span:hover {
+    color: #2A6586;
+  }
+  
+  .play {
+    background: #4AA9DE;
+    padding: 15px 18px;
+    border-radius: 100%;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+    position: relative;
+    z-index: 3;
+  }
+  
+  .play:active {
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  }
+  
+  .play:hover {
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+  }
+  
+  .prev {
+    background: #4aa9de;
+    border-radius: 10px 0 0px 10px;
+    padding-left: 15px;
+    padding-right: 10px;
+    margin-right: -5px;
+    z-index: 1;
+  }
+  
+  .next {
+    background: #4aa9de;
+    border-radius: 0px 10px 10px 0px;
+    padding-right: 15px;
+    padding-left: 10px;
+    margin-left: -5px;
+    z-index: 1;
+  }
+  
+  .progressb {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 490px;
+    margin-left: 20px;
+  }
+  
+  #prgbar {
+    background: transparent;
+    width: 350px;
+  }
+  
+  .plsoptions {
+    display: flex;
+    justify-content: space-evenly;
+    flex: 1;
+  }
+  
+  .plsoptions span {
+    cursor: pointer;
+  }
+  
+  .plsoptions span:hover {
+    color: #2A6586;
+  }
+  
+  .plsoptions span.active {
+    color: rgb(32, 77, 104);
+  }
+  
+  .currentT, .totalT {
+    width: 35px;
+  }
+
+input[type=range] {
+    -webkit-appearance: none;
+    margin: 10px 0;
+    width: 100%;
+  }
+  
+  input[type=range]:focus {
+    outline: none;
+  }
+  
+  input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 0px 0px 0px #000000;
+    background: #4aa9de;
+    border-radius: 5px;
+    border: 0px solid #000000;
+  }
+  
+  input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0px 0px 1px #000000;
+    border: 0px solid #000000;
+    height: 13px;
+    width: 4px;
+    border-radius: 50px;
+    background: #2a6586;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -4px;
+  }
+  
+  input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #4aa9de;
+  }
+  
+  input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 0px 0px 0px #000000;
+    background: #4aa9de;
+    border-radius: 5px;
+    border: 0px solid #000000;
+  }
+  
+  input[type=range]::-moz-range-thumb {
+    box-shadow: 0px 0px 1px #000000;
+    border: 0px solid #000000;
+    height: 13px;
+    width: 4px;
+    border-radius: 50px;
+    background: #2a6586;
+    cursor: pointer;
+  }
+  
+  input[type=range]::-ms-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    animate: 0.2s;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+  
+  input[type=range]::-ms-fill-lower {
+    background: #4aa9de;
+    border: 0px solid #000000;
+    border-radius: 10px;
+    box-shadow: 0px 0px 0px #000000;
+  }
+  
+  input[type=range]::-ms-fill-upper {
+    background: #4aa9de;
+    border: 0px solid #000000;
+    border-radius: 10px;
+    box-shadow: 0px 0px 0px #000000;
+  }
+  
+  input[type=range]::-ms-thumb {
+    box-shadow: 0px 0px 1px #000000;
+    border: 0px solid #000000;
+    height: 13px;
+    width: 4px;
+    border-radius: 50px;
+    background: #2a6586;
+    cursor: pointer;
+  }
+  
+  input[type=range]:focus::-ms-fill-lower {
+    background: #4aa9de;
+  }
+  
+  input[type=range]:focus::-ms-fill-upper {
+    background: #4aa9de;
+  }
+  
+  .plsoptions {
+    justify-self: flex-end;
+  }

@@ -53,7 +53,7 @@ const ProfileData: React.FC<ProfileDataType> = ({profile, ...props}) => {
 }
 
 const Contact: React.FC<ContactType> = ({contactTitle, contactValue}) => {
-    return <div className={s.contact}><span className={s.infoKey}>{contactTitle}:</span> {contactValue}</div>
+    return <div className={s.contact}><span className={s.infoKey}>{contactTitle}:</span> <a href={contactValue}>{contactValue}</a></div>
 }
 
 export default ProfileData

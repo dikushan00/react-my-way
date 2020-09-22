@@ -3,14 +3,22 @@ import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 import userPhoto from '../../img/user(1).svg'
 import logoImg from '../../img/logo.png'
-import {ProfileInitialStateType} from "../../redux/profile_reducer";
+import { useDispatch, useSelector } from 'react-redux';
+import { AppStateType } from '../../redux/store-redux';
+import { logoutMe } from '../../redux/header_reducer';
+import MusicPlayer from './MusicPlayer';
+import HeaderSearchForm from './HeaderSearchForm';
 
-const Header: React.FC<PropsType> = (props) => {
+const Header: React.FC = () => {
 
+    const dispatch = useDispatch()
+    const isAuth = useSelector((state: AppStateType) => state.auth.isAuth)
+    const photos = useSelector((state: AppStateType) => state.profilePage.photos)
+    const login = useSelector((state: AppStateType) => state.auth.login)
     const [isLogInfoMode, setLogInfoMode] = useState(false)
 
     const logout = () => {
-        props.logoutMe()
+        dispatch(logoutMe())
     }
 
     function onClickClose(elem: HTMLElement) {
@@ -35,17 +43,19 @@ const Header: React.FC<PropsType> = (props) => {
 
     return <header className={s.header}>
         <NavLink className="logo" to='/'><img src={logoImg} /></NavLink>
+        <HeaderSearchForm />
+        <MusicPlayer />
         <div className={s.authArea} id="Drop" style={{height: "100%"}}>
-            { props.isAuth
+            { isAuth
                 ? <div className={s.accountInfo} onClick = {() => setLogInfoMode(true)}>
-                    { props.state.photos 
-                        ? props.state.photos.large && <img src={props.state.photos.large} className={s.userImg}/> 
+                    { photos 
+                        ? photos.large && <img src={photos.large} className={s.userImg}/> 
                         : <img src={userPhoto} className={s.userImg}/>}
-                    {props.login}
+                    {login}
                     {
                         isLogInfoMode 
                         && <div className={s.accountDrop} id="accountDrop">
-                            <NavLink to="/profile" className={s.login}>{props.login}</NavLink>
+                            <NavLink to="/profile" className={s.login}>{login}</NavLink>
                             <button onClick={logout} className = "btn" style={{marginTop: "15px"}}>logout</button>
                         </div>
                     }
@@ -57,12 +67,3 @@ const Header: React.FC<PropsType> = (props) => {
 }
 
 export default Header;
-
-
-
-type PropsType = {
-    logoutMe: () => void
-    state: ProfileInitialStateType
-    isAuth: boolean
-    login: string | null
-}

@@ -6,23 +6,28 @@ import commentUserPhoto from '../../../img/user22.jpg'
 import likesPhotoActive from '../../../img/heart_active.svg'
 import userPhoto from '../../../img/user(1).svg'
 import {Element} from '../../common/FormControl/FormControl';
-import { reduxForm, Field, InjectedFormProps } from 'redux-form';
+import { reduxForm, Field, InjectedFormProps, reset } from 'redux-form';
 import {NewsItemType} from '../../../redux/news_reducer'
+import { useDispatch, useSelector } from 'react-redux';
+import { AppStateType } from '../../../redux/store-redux';
+import { actions } from '../../../redux/news_reducer';
 
-const NewsItem: React.FC<PropsType> = (props) => {
+const NewsItem: React.FC<PropsType> = ({post}) => {
 
+    const dispatch = useDispatch()
+    const avatarPhoto = useSelector((state: AppStateType) => state.profilePage.photos && state.profilePage.photos.large)
     const [isBigMode, setBigMode] = useState(false)
 
     let onAddComment = (data: any) => {
-        if(data['comment' + props.post.id]){
-            props.addComment(props.post.id, data['comment' + props.post.id]);
-            props.updateCommentCount(props.post.id)
-            props.reset('commentForm')
+        if(data['comment' + post.id]){
+            dispatch(actions.addNewComment(post.id, data['comment' + post.id]))
+            dispatch(actions.updateCommentCount(post.id))
+            dispatch(reset('commentForm'))
         }
     }
 
     let onAddLike = (id: number) => {
-        props.updateLikeCount(id)
+        dispatch(actions.updateLikeCount(id))
     }
 
     if(isBigMode) {
@@ -37,34 +42,34 @@ const NewsItem: React.FC<PropsType> = (props) => {
                 <span style = {{display: "flex", alignItems: "center"}}>
                     <span>
                         {
-                        props.post.avatar 
-                            ? <img src={props.post.avatar} alt="PHOTO" className={s.userImg}/>
+                        post.avatar 
+                            ? <img src={post.avatar} alt="PHOTO" className={s.userImg}/>
                             : <img src={userPhoto} alt="PHOTO" className={s.userImg}/>
                         }
                     </span>
-                    <span className={s.user}>{props.post.fullName}</span>
+                    <span className={s.user}>{post.fullName}</span>
                 </span>
-                <span className={s.newsTitle}> {props.post.title} </span>
+                <span className={s.newsTitle}> {post.title} </span>
                 <div>
-                    <img src={props.post.photo} alt="Photo"/>
+                    <img src={post.photo} alt="Photo"/>
                 </div>
             </div>
             <div className={s.reviewCount}> 
                 <span>
                 {
-                    props.post.liked 
-                    ? <img src={likesPhotoActive} alt="PHOTO" className={s.reviewIcon} onClick={() => onAddLike(props.post.id)}/>
-                    : <img src={likesPhoto} alt="PHOTO" className={s.reviewIcon} onClick={() => onAddLike(props.post.id)}/>
-                } {props.post.likesCount} 
+                    post.liked 
+                    ? <img src={likesPhotoActive} alt="PHOTO" className={s.reviewIcon} onClick={() => onAddLike(post.id)}/>
+                    : <img src={likesPhoto} alt="PHOTO" className={s.reviewIcon} onClick={() => onAddLike(post.id)}/>
+                } {post.likesCount} 
                 </span>
                  <span> 
-                    <img src={commentPhoto} alt="PHOTO" className={s.reviewIcon}/>{props.post.CommentsCount} 
+                    <img src={commentPhoto} alt="PHOTO" className={s.reviewIcon}/>{post.CommentsCount} 
                  </span> 
             </div>
-            <CommentFormRedux onSubmit={onAddComment} id = {props.post.id}/>
-            <NewsCommentsArea post = {props.post} avatarPhoto = {props.avatarPhoto}/>
+            <CommentFormRedux onSubmit={onAddComment} id = {post.id}/>
+            <NewsCommentsArea post = {post} avatarPhoto = {avatarPhoto}/>
             {
-                isBigMode && <NewsItemBigMode post = {props.post} avatarPhoto = {props.avatarPhoto} onAddLike = {onAddLike} isBigMode = {isBigMode} setBigMode = {setBigMode} onAddComment = {onAddComment} />
+                isBigMode && <NewsItemBigMode post = {post} avatarPhoto = {avatarPhoto} onAddLike = {onAddLike} isBigMode = {isBigMode} setBigMode = {setBigMode} onAddComment = {onAddComment} />
             }
         </div>
     );
@@ -165,12 +170,6 @@ type BigModeType = {
 
 type PropsType = {
     post: NewsItemType
-    avatarPhoto: string | null | undefined
-    
-    addComment: (id: number, data: string) => void
-    updateCommentCount: (id: number) => void
-    updateLikeCount: (id: number) => void
-    reset: (form: string) => void
 }
 
 type CommentFormValuesKeys = Extract<keyof CommentFormValuesType, string>

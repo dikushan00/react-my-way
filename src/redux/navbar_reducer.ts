@@ -1,11 +1,4 @@
 
-export type NavDataItemType = {
-    id: number
-    href: string
-    name: string
-    photo: string
-}
-
 let initialState = {
     navData: [
         {
@@ -55,3 +48,10 @@ let navbar_reducer = (state = initialState, action: any):NavbarInitialStateType 
 }
 
 export default navbar_reducer
+
+export type NavDataItemType = {
+    id: number
+    href: string
+    name: string
+    photo: string
+}

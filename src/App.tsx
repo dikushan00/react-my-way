@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import './App.css';
-import {NavbarContainer} from './components/Navbar/Navbar';
 import {Route, withRouter, BrowserRouter} from "react-router-dom";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -20,6 +19,7 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+import Navbar from './components/Navbar/Navbar';
 
 const WithSusmensDialogs = withSuspens(DialogsContainer)
 const WithSusmensUsers= withSuspens(UsersContainer)
@@ -46,7 +46,7 @@ class App extends PureComponent<PropsType> {
             <div className="wrapper">
                 <div className='app-wrapper'>
                     <HeaderContainer />
-                    <NavbarContainer />
+                    <Navbar />
                     <div className="app-wrapper-content">
                         <Route path='/profile/:userId?' render={() => <ProfileContainer />}/>
                         <Route path='/dialogs/:userId?' render={() => <WithSusmensDialogs />}/>

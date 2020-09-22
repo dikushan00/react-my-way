@@ -3,14 +3,22 @@ import style from './Users.module.css'
 import photoUser from '../../img/user.svg'
 import {NavLink} from "react-router-dom";
 import { UserType } from '../../Types/Types';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppStateType } from '../../redux/store-redux';
+import { follow, unfollow } from '../../redux/users_reducer';
 
-type PropsType = {
-    user: UserType
-    toggleProgressArr: Array<number>
-    switch_follow: (followed: boolean, userId: number) => void
-}
+const UserItem: React.FC<PropsType> = ({user}) => {
 
-const UserItem: React.FC<PropsType> = ({user, switch_follow, toggleProgressArr}) => {
+    const switch_follow = (followed: boolean, userId: number) => {
+        if (followed) {
+            dispatch(unfollow(userId))
+        } else {
+            dispatch(follow(userId))
+        }
+    }
+
+    const dispatch = useDispatch()
+    const toggleProgressArr = useSelector((state: AppStateType) => state.usersPage.toggleProgressArr)
 
     return <div className={style.user}>
                 <NavLink to={"/profile/" + user.id}>
@@ -26,12 +34,11 @@ const UserItem: React.FC<PropsType> = ({user, switch_follow, toggleProgressArr})
                             disabled={toggleProgressArr.some(id => id === user.id)}>{user.followed ? "Unfollow" : "Follow"}
                     </button>
                 </span>
-
-                {/*<span>*/}
-                {/*    <div>{"user.location.city"}</div>*/}
-                {/*    <div>{"user.location.country"}</div>*/}
-                {/*</span>*/}
             </div>
 }
 
 export default UserItem
+
+type PropsType = {
+    user: UserType
+}

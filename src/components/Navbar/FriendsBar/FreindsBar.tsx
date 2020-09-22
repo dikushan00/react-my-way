@@ -1,14 +1,13 @@
 import React from 'react'
 import style from '../FriendsBar/FreindsBar.module.css'
-import { UserType } from '../../../Types/Types'
 import userPhoto from '../../../img/user(1).svg'
 import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { AppStateType } from '../../../redux/store-redux'
 
-type PropsType = {
-    friends: Array<UserType>
-}
+const FriendsBar: React.FC = () => {
 
-const FriendsBar: React.FC<PropsType> = ({friends}) => {
+    const friends = useSelector((state: AppStateType) => state.usersPage.friends)
 
     return <div className={style.FriendsBar}>
         <h3 style={{textAlign: 'center'}}>Friends</h3>

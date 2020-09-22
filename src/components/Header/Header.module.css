@@ -44,6 +44,7 @@
     display: block;
     top: 55px;
     left: 40px;
+    z-index: 5;
 }
 
 .userImg{

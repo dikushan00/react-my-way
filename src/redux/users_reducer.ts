@@ -1,17 +1,6 @@
 import {UsersAPI} from "../api/api";
 import { InferActionsTypes, ThunkType } from "./store-redux";
 
-type UsersDataItemType = {
-    name: string | null,
-    id: number,
-    photos: {
-      small: string | null,
-      large: string | null
-    },
-    status: string | null,
-    followed: boolean
-}
-
 let initialState = {
     usersData: [] as Array<UsersDataItemType>,
     pageSize: 100,
@@ -58,12 +47,12 @@ let users_reducer = (state = initialState, action: ActionsType) : InitialStateTy
             return { ...state, isFetching: action.isFetching}
         }
         case 'SN/Users/TOGGLE_PROGRESS': {
-            const ID = action.id
+            let userId = action.id
             return {
                 ...state,
-                toggleProgressArr: action.type
-                    ? [...state.toggleProgressArr, action.id]
-                    : state.toggleProgressArr.filter(id =>  id != ID)
+                toggleProgressArr: action.isFetching
+                    ? [...state.toggleProgressArr, userId]
+                    : [...state.toggleProgressArr.filter(id => id !== userId)] 
             } 
         }
         case 'SN/Users/GET_FRIENDS': {
@@ -126,6 +115,7 @@ export const follow = (userId: number): getThunkType => async (dispatch) => {
     const data = await UsersAPI.follow(userId)
         dispatch(actions.switch_follow(userId))
         dispatch(actions.toggleProgress(false, userId))
+        dispatch(getFriends())
 }
 
 export const unfollow = (userId: number): getThunkType => async (dispatch) => {
@@ -133,6 +123,19 @@ export const unfollow = (userId: number): getThunkType => async (dispatch) => {
     const data = await UsersAPI.unfollow(userId)
         dispatch(actions.switch_follow(userId))
         dispatch(actions.toggleProgress(false, userId))
+        dispatch(getFriends())
 }
 
 export default users_reducer
+
+
+type UsersDataItemType = {
+    name: string | null,
+    id: number,
+    photos: {
+        small: string | null,
+        large: string | null
+    },
+    status: string | null,
+    followed: boolean
+}

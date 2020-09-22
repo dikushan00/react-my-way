@@ -70,6 +70,7 @@ let initialState = {
     ] as Array<PostItemType>,
     profile: null as ProfileType | null,
     status: '',
+    isFetching: false,
     photos: null as PhotosType | null
 }
 
@@ -119,7 +120,9 @@ let profile_reducer = (state = initialState, action: ActionsType): ProfileInitia
                 photos: action.profile.photos
             }
         }
-
+        case 'SN/Profile/TOGGLE_FETCHING': {
+            return { ...state, isFetching: action.isFetching}
+        }
         case 'SN/Profile/SET_STATUS': {
 
             return {
@@ -190,6 +193,7 @@ export const actions = {
     addPost: (newPostText: string) => ({type: 'SN/Profile/ADD_NEW_POST', newPostText} as const),
     profileInfo: (profile: ProfileType) => ({type: 'SN/Profile/PROFILE_INFO', profile} as const),
     myProfileInfo: (profile: ProfileType) => ({type: 'SN/Profile/My_PROFILE_INFO', profile} as const),
+    toggleIsFetching: (isFetching: boolean) => ({type: 'SN/Profile/TOGGLE_FETCHING', isFetching} as const),
     setStatus: (status: string) => ({type: 'SN/Profile/SET_STATUS', status} as const),
     setPhoto: (photoUrl: PhotosType) => ({type: 'SN/Profile/SET_PHOTO', photoUrl} as const),
     addNewComment: (id: number, newCommentText: string) => ({type: 'SN/Profile/ADD_NEW_COMMENT', id, newCommentText} as const),
@@ -198,8 +202,10 @@ export const actions = {
 }
 
 export const check_auth = (userId: number): getThunkType => async (dispatch) => {
+    dispatch(actions.toggleIsFetching(true))
     const data = await ProfileAPI.checkAuth(userId)
     dispatch(actions.profileInfo(data))
+    dispatch(actions.toggleIsFetching(false))
 }
 
 export const getStatus = (userId: number): getThunkType => async (dispatch) => {
@@ -237,9 +243,11 @@ export const saveProfile = (profile: SaveProfileType): getThunkType => async (di
 }
 
 export const check_auth_me = (): getThunkType => async (dispatch, getState) => {
+    dispatch(actions.toggleIsFetching(true))
     const myId = getState().auth.id;
     const data = await ProfileAPI.checkAuth(myId)
     dispatch(actions.myProfileInfo(data))
+    dispatch(actions.toggleIsFetching(false))
 }
 
 

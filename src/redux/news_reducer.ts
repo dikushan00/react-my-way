@@ -3,33 +3,6 @@ import { stat } from "fs";
 
 let id = 3;
 
-type CommentsType = {
-    userId: number
-    commentId: number
-    fullName: string
-    text: string
-    photo: string
-}
-
-export type StoriesType = {
-    id: number
-    userId: number
-    viewed: boolean
-    photo: string
-}
-
-export type NewsItemType = {
-    id: number,
-    fullName: string,
-    title: string,
-    avatar: string,
-    photo: string,
-    comments: Array<CommentsType>,
-    likesCount: number,
-    CommentsCount: number,
-    liked: boolean
-}
-
 let initialState = {
     news: [
         {
@@ -164,3 +137,31 @@ export const actions = {
 type ActionsType = InferActionsTypes<typeof actions>
 
 export default news_reducer
+
+
+type CommentsType = {
+    userId: number
+    commentId: number
+    fullName: string
+    text: string
+    photo: string
+}
+
+export type StoriesType = {
+    id: number
+    userId: number
+    viewed: boolean
+    photo: string
+}
+
+export type NewsItemType = {
+    id: number,
+    fullName: string,
+    title: string,
+    avatar: string,
+    photo: string,
+    comments: Array<CommentsType>,
+    likesCount: number,
+    CommentsCount: number,
+    liked: boolean
+}

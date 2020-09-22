@@ -84,7 +84,7 @@
     border-radius: 2px;
     outline: none;
     cursor: pointer;
-    margin-top: 5px;
+    margin: 15px 10px;
 }
 
 .btnFollow:hover {
@@ -92,12 +92,12 @@
     color: #fff;
 }
 
-.btnFollow.btnBlue:hover {
+.btnBlue:hover {
+    background-color: #4a76a8;
+}
+.btnRed:hover {
     background-color: #ff0000;
     border: 1px solid #ff0000;
-}
-.btnFollow.btnRed:hover {
-    background-color: #4a76a8;
 }
 
 /* Modal window */

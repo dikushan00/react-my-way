@@ -10,18 +10,6 @@ const Textarea1 = Element('textarea')
 const Textarea2 = Element('textarea')
 const Checkbox = Element('input')
 
-type PropsType = {
-    handleSubmit: () => {}
-    error: string
-    profile: SaveProfileType
-}
-
-export type ProfileFormValuesType = {
-    aboutMe: string
-    lookingForAJobDescription: string
-    lookingForAJob: boolean
-}
-
 type LoginFormValuesKeys = Extract<keyof ProfileFormValuesType, string>
 
 const ProfileDataForm: React.FC<PropsType & InjectedFormProps<ProfileFormValuesType, PropsType>> = (props) => {
@@ -49,3 +37,15 @@ const ProfileDataForm: React.FC<PropsType & InjectedFormProps<ProfileFormValuesT
 }
 
 export const ProfileDataFormRedux = reduxForm<ProfileFormValuesType, PropsType>({form: 'editProfileData'})(ProfileDataForm)
+
+
+type PropsType = {
+    handleSubmit: () => {}
+    error: string
+    profile: SaveProfileType
+}
+export type ProfileFormValuesType = {
+    aboutMe: string
+    lookingForAJobDescription: string
+    lookingForAJob: boolean
+}

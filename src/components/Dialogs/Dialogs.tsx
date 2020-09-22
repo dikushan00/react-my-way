@@ -2,44 +2,31 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {Field, reduxForm, InjectedFormProps} from "redux-form";
+import {Field, reduxForm, InjectedFormProps, reset} from "redux-form";
 import {maxLengthCreater, required} from "../utils/Validators/validators";
 import {Element} from "../common/FormControl/FormControl";
 import mailMain from "../../img/mailMain.svg"
-import {DialogsInitialStateType} from '../../redux/dialogs_reducer'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { sendMessage } from './../../redux/dialogs_reducer';
+import { actions } from './../../redux/dialogs_reducer';
+import { AppStateType } from '../../redux/store-redux';
 
-type PropsType = {
-    state: DialogsInitialStateType
-    userId: number
-    addMessage: (id: number, str: string) => void
-    reset: (form: string) => void
-}
+const Dialogs: React.FC<PropsType> = React.memo(({userId}) => {
 
-const Dialogs: React.FC<PropsType> = React.memo((props) => {
-
-    let dispatch = useDispatch()
-
-    let onAddMessage = (data: {newMessageText: string}) => {
-        props.addMessage(props.userId, data.newMessageText);
-        sendMessage(11009, data.newMessageText)
-        debugger
-        props.reset('DialogsForm')
-    }
+    const dialogsState = useSelector((state: AppStateType) => state.dialogPage)
 
     return (
         <>
             <div className={s.dialogs}>
                 <div className={s.dialogsItems}>
-                    {props.state.userData.map((user) =>
+                    {dialogsState.userData.map((user) =>
                         <DialogItem props={user} key={user.id}/>
                     )}
                 </div>
                 
                 {
-                    props.userId 
-                        ? <DialogsWindow onAddMessage = {onAddMessage} state={props.state} userId = {props.userId}/> 
+                    userId 
+                        ? <DialogsWindow  userId = {userId}/> 
                         : <DialogsMain />
                 }
                 
@@ -51,10 +38,6 @@ const Dialogs: React.FC<PropsType> = React.memo((props) => {
 let maxLength15 = maxLengthCreater(15);
 const Textarea = Element("textarea");
 
-type DialogFormValuesType = {
-    newMessageText: string
-}
-
 const DialogsForm: React.FC<InjectedFormProps<DialogFormValuesType>> = (props) => {
     return (
         <form className={s.inputArea} onSubmit={props.handleSubmit}>
@@ -65,23 +48,26 @@ const DialogsForm: React.FC<InjectedFormProps<DialogFormValuesType>> = (props) =
 }
 const DialogsFormRedux = reduxForm<DialogFormValuesType>({form: 'DialogsForm'})(DialogsForm)
 
-type DialogsWindowType = {
-    state: DialogsInitialStateType
-    userId: number
-    onAddMessage: (data: {newMessageText: string}) => void
-}
+const DialogsWindow: React.FC<DialogsWindowType> = ({userId}) => {
 
-const DialogsWindow: React.FC<DialogsWindowType> = props => {
+    const dispatch = useDispatch()
+    const messageData = useSelector((state: AppStateType) => state.dialogPage.messageData)
+
+    let onAddMessage = (data: {newMessageText: string}) => {
+        actions.addMessage(userId, data.newMessageText);
+        sendMessage(11009, data.newMessageText)
+        dispatch(reset('DialogsForm'))
+    }
 
     return <div className={s.messages}>
         {
-            props.state.messageData.map((message) => {
-                return message.id === Number(props.userId) &&
+            messageData.map((message) => {
+                return message.id === Number(userId) &&
                     message.messages.map(message => <Message props={message} key={message.id}/>
                 )
             })
         }
-        <DialogsFormRedux onSubmit={props.onAddMessage}/>
+        <DialogsFormRedux onSubmit={onAddMessage}/>
     </div>
 }
 
@@ -93,3 +79,15 @@ const DialogsMain = () => {
 }
 
 export default Dialogs;
+
+
+
+type DialogFormValuesType = {
+    newMessageText: string
+}
+type PropsType = {
+    userId: number
+}
+type DialogsWindowType = {
+    userId: number
+}
