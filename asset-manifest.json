@@ -1,7 +1,7 @@
 {
   "main.css": "/react-my-way/static/css/main.06baead8.chunk.css",
-  "main.js": "/react-my-way/static/js/main.e19f86f5.chunk.js",
-  "main.js.map": "/react-my-way/static/js/main.e19f86f5.chunk.js.map",
+  "main.js": "/react-my-way/static/js/main.f30bbcb9.chunk.js",
+  "main.js.map": "/react-my-way/static/js/main.f30bbcb9.chunk.js.map",
   "static/css/1.75253b95.chunk.css": "/react-my-way/static/css/1.75253b95.chunk.css",
   "static/js/1.c6a68cd9.chunk.js": "/react-my-way/static/js/1.c6a68cd9.chunk.js",
   "static/js/1.c6a68cd9.chunk.js.map": "/react-my-way/static/js/1.c6a68cd9.chunk.js.map",
@@ -25,11 +25,11 @@
   "static/media/logo.png": "/react-my-way/static/media/logo.3fa434f6.png",
   "static/media/App.css": "/react-my-way/static/media/Muli-Light.da0df440.svg",
   "static/media/mailMain.svg": "/react-my-way/static/media/mailMain.ff7f2d1d.svg",
-  "static/css/3.5fd077f0.chunk.css.map": "/react-my-way/static/css/3.5fd077f0.chunk.css.map",
-  "static/css/1.75253b95.chunk.css.map": "/react-my-way/static/css/1.75253b95.chunk.css.map",
-  "static/css/main.06baead8.chunk.css.map": "/react-my-way/static/css/main.06baead8.chunk.css.map",
   "static/css/2.e94e4922.chunk.css.map": "/react-my-way/static/css/2.e94e4922.chunk.css.map",
+  "static/css/main.06baead8.chunk.css.map": "/react-my-way/static/css/main.06baead8.chunk.css.map",
+  "static/css/1.75253b95.chunk.css.map": "/react-my-way/static/css/1.75253b95.chunk.css.map",
+  "static/css/3.5fd077f0.chunk.css.map": "/react-my-way/static/css/3.5fd077f0.chunk.css.map",
   "index.html": "/react-my-way/index.html",
-  "precache-manifest.16a521ac70642f0f37d7b2059cc26579.js": "/react-my-way/precache-manifest.16a521ac70642f0f37d7b2059cc26579.js",
+  "precache-manifest.496bccac8598cc6d1dadea47c982e6b3.js": "/react-my-way/precache-manifest.496bccac8598cc6d1dadea47c982e6b3.js",
   "service-worker.js": "/react-my-way/service-worker.js"
 }
