@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Profile from "./Profile";
 import { useDispatch, useSelector} from "react-redux";
 import {check_auth, getStatus} from "../../redux/profile_reducer";
-import {withRouter, RouteComponentProps, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {compose} from "redux";
 import {withAuthRedirect} from "../HOC/withAuthRedirect"
 import { AppStateType } from '../../redux/store-redux';
@@ -15,7 +15,7 @@ const ProfileContainer:React.FC = () => {
 
     const refreshProfile = () => {
         //@ts-ignore
-        let userId: number = params.userId;
+        let userId = params.userId;
         if (!userId) userId = authId as number
         dispatch(check_auth(userId))
         dispatch(getStatus(userId))

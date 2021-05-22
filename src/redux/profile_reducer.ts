@@ -3,8 +3,6 @@ import { stopSubmit, FormAction } from "redux-form";
 import {CommentsType, SaveProfileType, ProfileType} from './../Types/Types';
 import { ThunkType, InferActionsTypes } from "./store-redux";
 
-let id = 0
-
 let initialState = {
     postsData: [
         {
@@ -149,7 +147,6 @@ let profile_reducer = (state = initialState, action: ActionsType): ProfileInitia
                         return item
                     })
                 }
-                id++;
             }
             return state
         }
@@ -232,14 +229,14 @@ export const saveProfile = (profile: SaveProfileType): getThunkType => async (di
     const userId = getState().auth.id;
     const response = await ProfileAPI.saveProfile(profile);
 
-        if (response.data.resultCode === ResultCodeEnum.Success) {
-            if(userId)
-                dispatch(check_auth(userId));
-            else throw new Error
-        } else {
-            dispatch(stopSubmit("editProfileData", {_error: response.data.messages[0]}));
-            return Promise.reject(response.data.messages[0]);
-        }
+    if (response.data.resultCode === ResultCodeEnum.Success) {
+        if(userId)
+            dispatch(check_auth(userId));
+        else throw new Error
+    } else {
+        dispatch(stopSubmit("editProfileData", {_error: response.data.messages[0]}));
+        return Promise.reject(response.data.messages[0]);
+    }
 }
 
 export const check_auth_me = (): getThunkType => async (dispatch, getState) => {
@@ -253,7 +250,6 @@ export const check_auth_me = (): getThunkType => async (dispatch, getState) => {
 
 export default profile_reducer
 
-
 export type PostItemType = {
     id: number,
     fullName: string,
@@ -265,6 +261,7 @@ export type PostItemType = {
     CommentsCount: number,
     liked: boolean
 }
+
 
 type PhotosType = {
     small: string | null

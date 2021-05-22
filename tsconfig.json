@@ -12,7 +12,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "outDir": "dist",
+    "lib": [
+      "dom",
+      "es2019"
+    ]
   },
   "include": [
     "src"

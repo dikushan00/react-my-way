@@ -35,8 +35,5 @@ export type ThunkType<A extends Action> = ThunkAction<Promise<void>, AppStateTyp
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleWare)));
 
-// @ts-ignore
-window.store = store;
-
 export default store
 

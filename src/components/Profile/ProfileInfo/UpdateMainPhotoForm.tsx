@@ -20,6 +20,7 @@ const UpdateMainPhotoForm: React.FC<InjectedFormProps<FormValueType, PropsType> 
         const { fields } = props
         const files = e.target.files
         fields.photo.handleChange(files)
+        debugger
     }
 
     return (

@@ -1,85 +1,58 @@
-import React, {PureComponent} from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
-import {Route, withRouter, BrowserRouter} from "react-router-dom";
-import Music from "./components/Music/Music";
-import Settings from "./components/Settings/Settings";
+import {HashRouter, Route, Switch} from "react-router-dom";
+import Navbar from './components/Navbar/Navbar';
 import Footer from "./Footer";
-import Login from "./components/Login/Login";
-import NewsContainer from "./components/News/NewsContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import {compose} from "redux";
-import {Provider, connect} from "react-redux";
+import {Provider, useDispatch, useSelector} from "react-redux";
 import Preloader from "./components/common/Preloader/Preloader";
 import {init} from "./redux/app_reducer";
-import {check_auth} from "./redux/profile_reducer";
 import store, {AppStateType} from "./redux/store-redux";
-import { withSuspens } from './components/HOC/withSuspens';
-import ProfileContainer from './components/Profile/ProfileContainer';
+import {componentsData} from "./componentsDataArr";
 
+const App: React.FC = () => {
 
-const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
-const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
-import Navbar from './components/Navbar/Navbar';
+    const dispatch = useDispatch()
+    const initialized = useSelector((state: AppStateType) => state.app.initialized)
 
-const WithSusmensDialogs = withSuspens(DialogsContainer)
-const WithSusmensUsers= withSuspens(UsersContainer)
+    useEffect(() => {
+        dispatch(init())
+    }, [])
 
-type PropsType = {
-    init: () => void
-    initialized: boolean
-    myId: number
-}
-
-class App extends PureComponent<PropsType> {
-
-    componentDidMount() {
-        this.props.init()
+    if (!initialized) {
+        return <Preloader/>
     }
 
-    render() {
+    // @ts-ignore
+    return (
+        <div className="wrapper">
+            <div className='app-wrapper'>
+                <HeaderContainer/>
+                <Navbar/>
+                <div className="app-wrapper-content">
+                    <Switch>
+                        {
+                            componentsData.map((item, i) => {
+                                return <Route key = {i} path={item.path} exact={item.exact} render={() => item.Component}/>
 
-        if (!this.props.initialized){
-            return <Preloader />
-        }
-        
-        return (
-            <div className="wrapper">
-                <div className='app-wrapper'>
-                    <HeaderContainer />
-                    <Navbar />
-                    <div className="app-wrapper-content">
-                        <Route path='/profile/:userId?' render={() => <ProfileContainer />}/>
-                        <Route path='/dialogs/:userId?' render={() => <WithSusmensDialogs />}/>
-                        <Route path='/music' render={() => <Music/>}/>
-                        <Route path='/settings' render={() => <Settings/>}/>
-                        <Route path='/news' render={() => <NewsContainer />}/>
-                        <Route exact path='/' render={() => <NewsContainer />}/>
-                        <Route path='/users' render={ () => <WithSusmensUsers />}/>
-                        <Route path='/login' render={() => <Login/>}/>
-                    </div>
+                            })
+                        }
+                    </Switch>
                 </div>
-                <Footer/>
             </div>
-        )
-    }
+            <Footer/>
+        </div>
+    )
 }
-
-let mapStateToProps = (state: AppStateType) => ({
-    initialized: state.app.initialized,
-    myId: state.auth.id
-})
-
-const AppContainer = compose<React.ComponentType>(
-    withRouter,
-    connect(mapStateToProps, {init, check_auth}) 
-)(App);
 
 const MyWayApp = () => {
-    return <BrowserRouter>
-                <Provider store={store}>
-                    <AppContainer />
-                </Provider>
-            </BrowserRouter>
+    return <HashRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </HashRouter>
 }
 
 export default MyWayApp
+
+//process.env.PUBLIC_URL

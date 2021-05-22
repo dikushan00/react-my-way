@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ProfileType, UserType, PhotosType, SaveProfileType } from "../Types/Types";
+import {ProfileType, UserType, PhotosType, SaveProfileType} from "../Types/Types";
 
 
 const instance = axios.create({
@@ -10,7 +10,7 @@ const instance = axios.create({
     }
 })
 
-export enum ResultCodeEnum{
+export enum ResultCodeEnum {
     Success = 0,
     Error = 1
 }
@@ -96,6 +96,7 @@ export const ProfileAPI = {
 }
 
 export const LoginAPI = {
+    
     checkLogin(email: string | null, password: string | null, rememberMe: boolean, captcha: string | null = null) {
         return instance.post<PostLoginType>(`auth/login`, {email, password, rememberMe, captcha})
     },
@@ -142,7 +143,7 @@ type GetUsersType = {
 
 
 type AuthMeType = {
-    data: {id: number | null, login: string | null, email: string | null}
+    data: { id: number | null, login: string | null, email: string | null }
     resultCode: ResultCodeEnum | CaptchaEnum
     messages: Array<string>
 }
@@ -164,7 +165,7 @@ type DeleteLoginType = {
 }
 
 type PostLoginType = {
-    data: {userId: number}
+    data: { userId: number }
     resultCode: ResultCodeEnum | CaptchaEnum
     messages: Array<string>
 }

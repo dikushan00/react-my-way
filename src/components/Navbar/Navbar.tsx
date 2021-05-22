@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
             <div className={s.item} key={data.id}>
                 <NavLink to={'/' + data.href} className={s.itemLink}>
                     <span className={s.linkWrap}>
-                        <span className={s.navbarItemImg + ' ' + s[data.name.toLowerCase().toString()]}></span>
+                        <span className={s.navbarItemImg + ' ' + s[data.name.toLowerCase().toString()]}/>
                         <span className={s.linkName}>{data.name}</span>
                     </span>
                 </NavLink>

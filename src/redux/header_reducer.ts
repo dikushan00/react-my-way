@@ -40,9 +40,9 @@ type ActionsType = InferActionsTypes<typeof actions>
 type GetThunkType = ThunkType<ActionsType | FormAction>
 
 export const checkAuthMe = (): GetThunkType => async (dispatch) => {
-    const data = await AuthAPI.checkAuthMe()
-    if (data.resultCode === ResultCodeEnum.Success) {
-        let {id, login, email} = data.data
+    const response = await AuthAPI.checkAuthMe()
+    if (response.resultCode === ResultCodeEnum.Success) {
+        let {id, login, email} = response.data
         dispatch(actions.setNewAuth(id, login, email, true))
     }
 }

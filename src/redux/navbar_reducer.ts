@@ -36,6 +36,12 @@ let initialState = {
             "href": "settings",
             "name": "Settings",
             "photo": "https://image.flaticon.com/icons/svg/889/889744.svg"
+        },
+        {
+            "id": 7,
+            "href": "chat",
+            "name": "Chat",
+            "photo": "https://image.flaticon.com/icons/svg/889/889744.svg"
         }
     ] as Array<NavDataItemType>
 }
