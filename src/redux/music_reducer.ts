@@ -3,10 +3,6 @@ import {InferActionsTypes} from "./store-redux";
 let initialState = {
     songs: [
         [
-            "The Beaten Path",
-            "https://www.youtube.com/audiolibrary_download?vid=e0a7d8421cdacd6f"
-        ],
-        [
             "Homeroad",
             "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Kai_Engel/Satin/Kai_Engel_-_09_-_Homeroad.mp3"
         ],

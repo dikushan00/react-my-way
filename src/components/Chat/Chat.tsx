@@ -1,7 +1,5 @@
 import React from 'react';
-import {sendMessage} from "../../redux/dialogs_reducer";
-
-const socket = new WebSocket("wss://social-network.samuraijs.com/handlers/ChatHandler.ashx")
+import Preloader from "../common/Preloader/Preloader";
 
 export type MessageType = {
     id: number,
@@ -12,30 +10,60 @@ export type MessageType = {
 }
 
 export const Chat = () => {
+    const [socketChanel, setSocketChanel] = React.useState<WebSocket | null>(null)
+    React.useEffect(() => {
+        let ws: WebSocket | null = null;
+        const tryToConnect = () => {
+            setTimeout(() => {
+                createChanel()
+            }, 3000)
+        }
+
+        function createChanel() {
+            ws = new WebSocket("wss://social-network.samuraijs.com/handlers/ChatHandler.ashx")
+            ws && ws.addEventListener("close", tryToConnect)
+            setSocketChanel(ws)
+        }
+
+        createChanel()
+        return () => {
+            ws && ws.close()
+            socketChanel && setSocketChanel(null)
+            ws && ws.removeEventListener("close", tryToConnect)
+        }
+    }, [])
+
+    if (!socketChanel) return <Preloader/>
     return <>
-        <Messages/>
-        <AddMessageForm/>
+        <Messages socketChanel={socketChanel}/>
+        <AddMessageForm socketChanel={socketChanel}/>
     </>
 }
 
-export const Messages = () => {
+export const Messages: React.FC<{ socketChanel: WebSocket | null }> = ({socketChanel}) => {
+    const messageWrapper = React.useRef(null)
     const [messages, setMessages] = React.useState([] as MessageType[])
 
     React.useEffect(() => {
-        socket.addEventListener("message", (e) => {
+        let addMessageEventListener = (e: MessageEvent) => {
             let messagesData = JSON.parse(e.data)
             setMessages((prevState) => [...prevState, ...messagesData])
-        })
-
+        }
+        socketChanel && socketChanel.addEventListener("message", addMessageEventListener)
+        return () => {
+            socketChanel && socketChanel.removeEventListener("message", addMessageEventListener)
+        }
     }, [])
-    return <>
+
+    if (!socketChanel) return <Preloader/>
+    return <div ref={messageWrapper} style={{maxHeight: "500px", overflowY: "scroll"}}>
         {
             messages ? messages.map((item, i) => {
-                return <Message key={i} message={item}/>
-            })
+                    return <Message key={i} message={item}/>
+                })
                 : "Сообщений не найдено"
         }
-    </>
+    </div>
 };
 
 type MessagePropsType = {
@@ -55,20 +83,29 @@ export const Message: React.FC<MessagePropsType> = ({message}) => {
     </>
 };
 
-export const AddMessageForm = () => {
-
+export const AddMessageForm: React.FC<{ socketChanel: WebSocket | null }> = ({socketChanel}) => {
     const [message, setMessage] = React.useState("")
+    const [readyState, setReadyState] = React.useState<'pending' | 'ready'>('pending')
 
+    React.useEffect(() => {
+        let addOpenEventListener = () => {
+            setReadyState('ready')
+        }
+        socketChanel && socketChanel.addEventListener("open", addOpenEventListener)
+        return () => {
+            socketChanel && socketChanel.removeEventListener("open", addOpenEventListener)
+        }
+    }, [])
     const sendMessage = () => {
-        if(!message) return;
-
-        socket.send(message)
+        if (!message) return;
+        socketChanel && socketChanel.send(message)
         setMessage("")
     }
-    return (
-        <>
-            <textarea name="message" value={message} onChange={(e) => setMessage(e.currentTarget.value)} id="addMessage" cols={30} rows={10}/>
-            <button onClick={() => sendMessage()}>Send</button>
-        </>
-    );
+    if (!socketChanel) return <Preloader/>
+    return <>
+            <textarea name="message" value={message}
+                      onChange={(e) => setMessage(e.currentTarget.value)}
+                      id="addMessage" cols={30} rows={10}/>
+        <button disabled={readyState !== 'ready'} onClick={() => sendMessage()}>Send</button>
+    </>
 };
