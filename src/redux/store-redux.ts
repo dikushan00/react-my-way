@@ -10,6 +10,7 @@ import thunkMiddleWare from 'redux-thunk'
 import app_reducer from "./app_reducer";
 import { ThunkAction } from 'redux-thunk';
 import music_reducer from "./music_reducer";
+import chat_reducer from "./chat_reducer";
 
 let reducers = combineReducers({
     dialogPage: dialogs_reducer,
@@ -20,6 +21,7 @@ let reducers = combineReducers({
     auth: header_reducer,
     app: app_reducer,
     music: music_reducer,
+    chat: chat_reducer,
     form: formReducer
 })
 
